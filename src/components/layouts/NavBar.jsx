@@ -27,7 +27,7 @@ const NavBar = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-1000 w-full px-9 py-2 transition-all duration-300 
-        ${isScrolled ? 'bg-transparent' : 'bg-gray'}`}
+        ${isScrolled ? 'bg-gray/30 backdrop-blur-lg' : 'bg-transparent'}`}
       style={{ transform: 'translate3d(0, 0, 0)' }}
     >
       <nav className='flex items-center justify-between'>
