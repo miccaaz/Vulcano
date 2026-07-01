@@ -1,9 +1,9 @@
 import React from 'react';
 
-const LargeCard = (index, title, img, category, rate) => {
+const LargeCard = ({ className = '', index, title, img, category, rate }) => {
   return (
-    <div key={index} className='bg-gray rounded-2xl p-2 hover:scale-105'>
-      <img src={img} className='rounded-xl' />
+    <div className={`flex bg-gray rounded-2xl p-2 w-96 ${className}`}>
+      <img src={img} alt={title} className='rounded-xl' />
       <article className='flex justify-between text-xl py-6'>
         <h3>{title}</h3>
         <span>{rate}</span>

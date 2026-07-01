@@ -48,9 +48,41 @@ const HorizontalScroll = () => {
   const revealLogoRef = useRef(null);
 
   useGSAP(() => {
+    const mainTrack = gsap.to(scrollRef.current, {
+      x: "-350vw",
+      ease: "none",
+      scrollTrigger: {
+        trigger: triggerRef.current,
+        pin: true,
+        scrub: 1,
+        start: "top top",
+        end: "+=5000",
+        anticipatePin: 1,
+        fastScrollEnd: true,
+        invalidateOnRefresh: true,
+      }
+    });
 
-  })
-  
+    gsap.fromTo(
+      revealLogoRef.current,
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: scrollRef.current,
+          containerAnimation: mainTrack,
+          start: "60% center",
+          end: "90% center",
+          scrub: true,
+        }
+      }
+    );
+
+  }, { scope: triggerRef });
+
   return (
     <section ref={triggerRef} className='relative h-screen w-full overflow-hidden bg-blue'>
       <div ref={revealLogoRef} className='absolute inset-0 flex flex-col items-center justify-center z-0'>
@@ -58,10 +90,10 @@ const HorizontalScroll = () => {
         <h2 className='text-7xl font-black text-white leading-none text-center'>VULCANO</h2>
       </div>
 
-      <div className='relative z-10 flex h-full items-center pointer-events-none'
-      style={{width: "450vw", paddingLeft: "100vw"}} >
+      <div ref={scrollRef} className='relative z-10 flex h-full items-center pointer-events-none'
+        style={{ width: "450vw", paddingLeft: "100vw" }} >
         {favs.map((fav, index) => (
-          <LargeCard index={index} title={fav.title} img={fav.img} rate={fav.rate} />
+          <LargeCard key={index} className="cards" index={index} title={fav.title} img={fav.img} rate={fav.rate} />
         ))}
       </div>
     </section>
